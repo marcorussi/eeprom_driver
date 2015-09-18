@@ -1,0 +1,1 @@
+A driver for 24C128/256 EEPROM develop on top of libopencm3 library for STM32F4 devices. The driver includes an example application tested with a STM32F4 Discovery board and and external EEPROM over I2C bus.
