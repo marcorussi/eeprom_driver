@@ -36,7 +36,11 @@
 
 /* ---------------- Local Defines ----------------- */
 
+/* EEPROM address */
+#define EEPROM_ADDRESS				0
 
+/* Address byte to send */
+#define ADDRESS_BYTE				((uint8_t)(0x50 | EEPROM_ADDRESS))
 
 
 /* ---------------- Local Macros ----------------- */
@@ -96,7 +100,7 @@ bool eeprom_write_byte(uint16_t address, uint8_t data)
 	while ((I2C_SR1(I2C1) & I2C_SR1_SB) == 0);
 
 	/* send device address, r/w request and wait for completion */
-	i2c_send_7bit_address(I2C1, 0x51, I2C_WRITE);
+	i2c_send_7bit_address(I2C1, ADDRESS_BYTE, I2C_WRITE);
 	while ((I2C_SR1(I2C1) & I2C_SR1_ADDR) == 0);
 
 	/* check SR2 and go on if OK */
@@ -138,7 +142,7 @@ bool eeprom_write_page(uint16_t address, uint8_t *data_ptr, uint16_t data_length
 	while ((I2C_SR1(I2C1) & I2C_SR1_SB) == 0);
 
 	/* send device address, r/w request and wait for completion */
-	i2c_send_7bit_address(I2C1, 0x51, I2C_WRITE);
+	i2c_send_7bit_address(I2C1, ADDRESS_BYTE, I2C_WRITE);
 	while ((I2C_SR1(I2C1) & I2C_SR1_ADDR) == 0);
 
 	/* check SR2 and go on if OK */
@@ -186,7 +190,7 @@ bool eeprom_read_byte(uint16_t address, uint8_t *byte_ptr)
 	while ((I2C_SR1(I2C1) & I2C_SR1_SB) == 0);
 
 	/* send device address, write request and wait for completion */
-	i2c_send_7bit_address(I2C1, 0x51, I2C_WRITE);
+	i2c_send_7bit_address(I2C1, ADDRESS_BYTE, I2C_WRITE);
 	while ((I2C_SR1(I2C1) & I2C_SR1_ADDR) == 0);
 
 	/* check SR2 and go on if OK */
@@ -206,7 +210,7 @@ bool eeprom_read_byte(uint16_t address, uint8_t *byte_ptr)
 		while ((I2C_SR1(I2C1) & I2C_SR1_SB) == 0);
 
 		/* send device address, read request and wait for completion */
-		i2c_send_7bit_address(I2C1, 0x51, I2C_READ);
+		i2c_send_7bit_address(I2C1, ADDRESS_BYTE, I2C_READ);
 		while ((I2C_SR1(I2C1) & I2C_SR1_ADDR) == 0);
 
 		/* if communication ongoing  */
@@ -239,7 +243,7 @@ bool eeprom_read_page(uint16_t address, uint8_t *byte_ptr, uint16_t data_length)
 	while ((I2C_SR1(I2C1) & I2C_SR1_SB) == 0);
 
 	/* send device address, write request and wait for completion */
-	i2c_send_7bit_address(I2C1, 0x51, I2C_WRITE);
+	i2c_send_7bit_address(I2C1, ADDRESS_BYTE, I2C_WRITE);
 	while ((I2C_SR1(I2C1) & I2C_SR1_ADDR) == 0);
 
 	/* check SR2 and go on if OK */
@@ -259,7 +263,7 @@ bool eeprom_read_page(uint16_t address, uint8_t *byte_ptr, uint16_t data_length)
 		while ((I2C_SR1(I2C1) & I2C_SR1_SB) == 0);
 
 		/* send device address, read request and wait for completion */
-		i2c_send_7bit_address(I2C1, 0x51, I2C_READ);
+		i2c_send_7bit_address(I2C1, ADDRESS_BYTE, I2C_READ);
 		while ((I2C_SR1(I2C1) & I2C_SR1_ADDR) == 0);
 
 		/* if communication ongoing  */
