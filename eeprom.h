@@ -25,18 +25,20 @@
 
 
 
-/* ----------- Exported typedefs ------------- */
+/* ----------- Exported constants ------------- */
 
-
-
+#define PAGE_SIZE		0x40
+#define PAGE_MASK		(PAGE_SIZE-1)
 
 /* ----------- Exported functions prototypes ------------- */
 
 extern void eeprom_init(void);
 extern bool eeprom_write_byte(uint16_t, uint8_t);
 extern bool eeprom_write_page(uint16_t, uint8_t *, uint16_t);
+extern bool eeprom_write_block(uint16_t, uint8_t *, uint16_t);
 extern bool eeprom_read_byte(uint16_t, uint8_t *);
 extern bool eeprom_read_page(uint16_t, uint8_t *, uint16_t);
+extern bool eeprom_read_block(uint16_t, uint8_t *, uint16_t);
 
 
 
